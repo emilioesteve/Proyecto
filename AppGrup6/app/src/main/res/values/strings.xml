@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">ScaleApp</string>
+    <string name="tab_text_1">Peso</string>
+    <string name="tab_text_2">Altura</string>
+    <string name="tab_text_3">IMC</string>
+    <string name="action_settings">Opciones</string>
+    <string-array name="altura">
+        <item>cm</item>
+        <item>m</item>
+    </string-array>
+    <string-array name="alturavalores">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="peso">
+        <item>kg</item>
+        <item>lb</item>
+    </string-array>
+    <string-array name="pesovalores">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="actividad">
+        <item>sedentario</item>
+        <item>activo</item>
+    </string-array>
+    <string-array name="actividadvalores">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string name="fui_default_toolbar_title">Tipo de Autentificación</string>
+    <string name="fui_sign_in_with_email">Entra con tu correo</string>
+    <string name="fui_progress_dialog_signing_up">Creando cuenta...</string>
+    <string name="facebook_application_id"
+        translatable="false">2246350032300199</string>
+    <string name="facebook_login_protocol_scheme"
+        translatable="false">fb2246350032300199</string>
+</resources>

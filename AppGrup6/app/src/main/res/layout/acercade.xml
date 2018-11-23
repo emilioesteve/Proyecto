@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TextView01"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Esta aplicación le proporciona al usuario los datos recogidos por báscula 3000, además
+de los datos de los sensores distribuidos por la casa inteligente."/>

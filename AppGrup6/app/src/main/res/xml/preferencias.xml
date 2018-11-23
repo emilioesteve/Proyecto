@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="preferencias_principal" >
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/peso"
+        android:entryValues="@array/pesovalores"
+        android:key="graficos"
+        android:title="Unidad peso" />
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/altura"
+        android:entryValues="@array/alturavalores"
+        android:key="graficos"
+        android:title="Unidad altura" />
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/actividad"
+        android:entryValues="@array/actividadvalores"
+        android:key="graficos"
+        android:title="Actividad" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="switch_preference_1"
+        android:title="Modo noche"
+        android:visibility="visible" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="switch_preference_2"
+        android:title="Activar notificaciones"
+        android:visibility="visible" />
+
+</PreferenceScreen>

@@ -111,11 +111,13 @@
                 android:layout_height="66dp"
                 android:layout_marginTop="2dp"
                 app:layout_constraintTop_toBottomOf="@+id/editar"
-                tools:layout_editor_absoluteX="2dp">
+                tools:layout_editor_absoluteX="2dp"
+                tools:ignore="MissingConstraints">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:onClick="llamarServTecnico">
 
                     <TextView
                         android:id="@+id/textView7"
@@ -128,7 +130,7 @@
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
                         android:drawableLeft="@drawable/ic_golf_course_black_24dp"
-                        android:text="METAS"
+                        android:text="SERVICIO TECNICO"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +144,8 @@
                 android:layout_height="66dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@+id/metas"
-                tools:layout_editor_absoluteX="0dp">
+                tools:layout_editor_absoluteX="0dp"
+                tools:ignore="MissingConstraints">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -177,7 +180,7 @@
                 android:layout_marginTop="2dp"
                 app:layout_constraintTop_toBottomOf="@+id/about"
                 tools:layout_editor_absoluteX="2dp"
-                >
+                tools:ignore="MissingConstraints">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -210,7 +213,8 @@
                 android:layout_height="66dp"
                 android:layout_marginTop="2dp"
                 app:layout_constraintTop_toBottomOf="@+id/ajustes"
-                tools:layout_editor_absoluteX="2dp">
+                tools:layout_editor_absoluteX="2dp"
+                tools:ignore="MissingConstraints">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"

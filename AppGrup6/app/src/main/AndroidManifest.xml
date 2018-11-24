@@ -27,6 +27,13 @@
         <activity android:name=".LogoutActivity" />
         <activity android:name=".UsuarioActivity"
             android:label="Información sobre el usuario" />
+        <receiver android:name="ReceptorLlamadas" >
+            <intent-filter >
+                <action android:name="android.intent.action.PHONE_STATE"/>
+            </intent-filter>
+        </receiver>
     </application>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
 </manifest>

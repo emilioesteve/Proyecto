@@ -1,9 +1,14 @@
 package com.example.grupo6.appgrup6;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -36,11 +41,23 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private NotificationManager notificationManager;
+    static final String CANAL_ID = "mi_canal";
+    static final int NOTIFICACION_ID = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        //Sistema de notificaciones parcialmente implementado.
+        int a = 20;
+
+        if( a < 30 ){
+            notificacion(null);
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -133,6 +150,27 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    public void notificacion(View view){
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(
+                    CANAL_ID, "Mis Notificaciones",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("Descripcion del canal");
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+        NotificationCompat.Builder notificacion =
+                new NotificationCompat.Builder(MainActivity.this, CANAL_ID)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle("ERROR")
+                        .setContentText("ERROR AL PESARSE");
+        PendingIntent intencionPendiente = PendingIntent.getActivity(
+                this, 0, new Intent(this, TabPeso.class), 0);
+        notificacion.setContentIntent(intencionPendiente);
+        notificationManager.notify(NOTIFICACION_ID, notificacion.build());
+
     }
 
 }

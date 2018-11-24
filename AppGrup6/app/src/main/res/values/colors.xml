@@ -3,4 +3,12 @@
     <color name="colorPrimary">#9C27B0</color>
     <color name="colorPrimaryDark">#7B1FA2</color>
     <color name="colorAccent">#FAAC58</color>
+
+    <color name="slider_background">#4227395a</color>
+    <array name="gradient">
+        <item>#b5fff6</item>
+        <item>#00ffdf</item>
+        <item>#00bfa4</item>
+        <item>#007c6a</item>
+    </array>
 </resources>

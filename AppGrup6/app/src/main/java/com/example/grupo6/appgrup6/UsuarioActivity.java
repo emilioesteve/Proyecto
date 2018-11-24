@@ -2,6 +2,7 @@ package com.example.grupo6.appgrup6;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -31,5 +32,10 @@ public class UsuarioActivity extends AppCompatActivity {
     public void lanzarPreferencias(View view) {
         Intent i = new Intent(this, PreferenciasActivity.class);
         startActivity(i);
+    }
+
+    public void llamarServTecnico(View view) {
+        startActivity(new Intent(Intent.ACTION_DIAL,
+                Uri.parse("tel:" + "646601542")));
     }
 }

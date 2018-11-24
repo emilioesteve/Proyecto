@@ -1,0 +1,10 @@
+class Bascula{
+  private:
+
+
+  public:
+
+
+
+  
+}

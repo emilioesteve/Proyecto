@@ -60,8 +60,6 @@ public class TabPeso extends Fragment {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     CollectionReference userPeso = db.collection("usuarios").document(user.getUid()).collection("bascula");
     ArrayList<Peso> pesoArrayList;
-    ArrayList<Peso> misPesos;
-    ArrayList<Peso> misFechas;
     MyAdapter adapter;
 
     //Sistema de notificaciones parcialmente implementado.

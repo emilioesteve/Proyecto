@@ -1,5 +1,7 @@
 package com.example.grupo6.appgrup6;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -115,6 +117,13 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
                 c.setText(payload);*/
             }
         });
+    }
+
+
+    public void pgWeb(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse("http://mqtt.org/"));
+        startActivity(intent);
     }
 
 }

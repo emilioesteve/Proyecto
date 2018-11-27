@@ -1,9 +1,15 @@
 package com.example.grupo6.appgrup6;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,6 +45,8 @@ import java.util.Map;
 import java.util.Random;
 
 import static android.content.ContentValues.TAG;
+import static android.content.Context.NOTIFICATION_SERVICE;
+
 
 public class TabPeso extends Fragment {
 
@@ -52,14 +60,20 @@ public class TabPeso extends Fragment {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     CollectionReference userPeso = db.collection("usuarios").document(user.getUid()).collection("bascula");
     ArrayList<Peso> pesoArrayList;
+    ArrayList<Peso> misPesos;
+    ArrayList<Peso> misFechas;
     MyAdapter adapter;
+
+    //Sistema de notificaciones parcialmente implementado.
+    int a = 20;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_peso, container, false);
         barChart = (BarChart)rootView.findViewById(R.id.barChart);
-        createCharts();
+
 
         pesoArrayList = new ArrayList<>();
         mRecyclerView = rootView.findViewById(R.id.recycler);
@@ -68,6 +82,8 @@ public class TabPeso extends Fragment {
         mRecyclerView.setLayoutManager(manager);
         setUpDatos();
         loadDataFromFirestore();
+
+        createCharts();
 
         return rootView;
 
@@ -168,8 +184,8 @@ public class TabPeso extends Fragment {
                             Log.d(TAG, documentSnapshot.getId() + " => " + documentSnapshot.getData());
 
                             Peso mimedida = new Peso(documentSnapshot.getString("fecha"),documentSnapshot.getDouble("peso"));
-                            pesoArrayList.add(mimedida);
 
+                            pesoArrayList.add(mimedida);
                         }
 
                         adapter = new MyAdapter(TabPeso.this, pesoArrayList);
@@ -180,10 +196,14 @@ public class TabPeso extends Fragment {
 
     }//loadDataFromFirestore()
 
+
+
+
     private void setUpDatos() {
 
         db = FirebaseFirestore.getInstance();
     }
+
 
 
 }

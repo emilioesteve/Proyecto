@@ -40,7 +40,7 @@ public class LogoutActivity extends AppCompatActivity {
 
         dialogo1.setTitle("Advertencia");
         dialogo1.setMessage("¿ Quiere cerrar sesión ?");
-        dialogo1.setCancelable(false);
+        dialogo1.setCancelable(true);
         dialogo1.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
                 aceptar();

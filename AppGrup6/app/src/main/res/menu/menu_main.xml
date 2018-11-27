@@ -9,10 +9,4 @@
         android:orderInCategory="3"
         android:title="Perfil de Usuario"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/sens"
-        android:icon="@android:drawable/alert_dark_frame"
-        android:orderInCategory="4"
-        android:title="sens"
-        app:showAsAction="always|withText" />
 </menu>

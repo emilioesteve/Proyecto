@@ -44,8 +44,7 @@ public class TabPeso extends Fragment {
 
     private BarChart barChart;
     private int[] pesos = { 74, 50, 65, 80, 76, 65, 80 };
-    private String[] dias = {"Lunes", "Martes", "Miércoles", "Jueves",
-            "Viernes", "Sábado", "Domingo"};
+    private String[] dias = {"L", "M", "X", "J","V", "S", "D"};
     private int[] colors = new int[]{ Color.BLACK, Color.RED, Color.BLUE, Color.GREEN,
             Color.MAGENTA, Color.YELLOW, Color.LTGRAY };
     FirebaseFirestore db =FirebaseFirestore.getInstance();

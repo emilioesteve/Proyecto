@@ -80,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                lanzarSensores(view);
             }
         });
-
     }
 
 
@@ -91,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void lanzarSensores(View view){
+        Intent intent = new Intent(this, SensorsActivity.class);
+        startActivity(intent);
+
     }
 
     @Override
@@ -104,10 +110,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, UsuarioActivity.class);
             startActivity(intent);
         }
-        if (id == R.id.sens) {
-            Intent intent = new Intent(this, SensorsActivity.class);
-            startActivity(intent);
-        }
+
 
         return super.onOptionsItemSelected(item);
     }

@@ -11,6 +11,8 @@ class SensorInfrarrojos{
         if(value == HIGH){
             Serial.println("Obstáculo detectado");
             return true;
+        } else{
+          return false;
         }
     }
 };

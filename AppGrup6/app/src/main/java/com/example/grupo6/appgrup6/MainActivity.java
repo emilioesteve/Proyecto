@@ -104,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, UsuarioActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.sens) {
+            Intent intent = new Intent(this, SensorsActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }

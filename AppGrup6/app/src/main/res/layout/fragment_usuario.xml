@@ -16,17 +16,70 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <android.support.v7.widget.CardView
+                android:id="@+id/contacto"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp"
+                app:contentPadding="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/metas"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="0dp">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="llamarServTecnico">
+
+                    <View
+                        android:id="@+id/divider6"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5sp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="130dp"
+                        android:layout_marginLeft="130dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintBottom_toTopOf="@+id/divider6"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_contact_24dp" />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:text="Contacto"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                        app:layout_constraintStart_toEndOf="@+id/imageView5"
+                        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
             <com.android.volley.toolbox.NetworkImageView
 
                 android:id="@+id/imagen"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:paddingTop="0dp"
                 android:src="@android:drawable/sym_def_app_icon"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -77,29 +130,49 @@
                 android:id="@+id/editar"
                 android:layout_width="match_parent"
                 android:layout_height="66dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp"
+                app:contentPadding="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5sp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="130dp"
+                        android:layout_marginLeft="130dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintBottom_toTopOf="@+id/divider"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_edit_black_24dp" />
+
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:drawableLeft="@drawable/ic_person_black_24dp"
-                        android:text="EDITAR PERFIL"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:text="Editar perfil"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                        app:layout_constraintStart_toEndOf="@+id/imageView2"
+                        app:layout_constraintTop_toTopOf="@+id/imageView2" />
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
 
@@ -108,32 +181,50 @@
                 android:id="@+id/metas"
                 android:layout_width="match_parent"
                 android:layout_height="66dp"
-                android:layout_marginTop="2dp"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp"
+                app:contentPadding="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/editar"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="2dp">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:onClick="llamarServTecnico">
+                    android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/textView7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:drawableLeft="@drawable/ic_golf_course_black_24dp"
-                        android:text="SERVICIO TECNICO"
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5sp"
+                        android:background="?android:attr/listDivider"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginLeft="130dp"
+                        android:layout_marginStart="130dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintBottom_toTopOf="@+id/divider3"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_golf_course_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
+                        android:text="Metas"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                        app:layout_constraintStart_toEndOf="@+id/imageView3"
+                        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
 
@@ -141,8 +232,7 @@
                 android:id="@+id/about"
                 android:layout_width="match_parent"
                 android:layout_height="66dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/metas"
+                app:layout_constraintTop_toBottomOf="@+id/contacto"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="0dp">
 
@@ -151,22 +241,40 @@
                     android:layout_height="match_parent"
                     android:onClick="lanzarAcercaDe">
 
-                    <TextView
-                        android:id="@+id/textView8"
+                    <ImageView
+                        android:id="@+id/imageView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:drawableLeft="@drawable/ic_info_outline_black_24dp"
-                        android:text="ACERCA DE"
+                        android:layout_marginStart="130dp"
+                        android:layout_marginLeft="130dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintBottom_toTopOf="@+id/divider4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_info_outline_black_24dp" />
+
+                    <View
+                        android:id="@+id/divider4"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5sp"
+                        android:background="?android:attr/listDivider"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginLeft="8dp"
+                        android:text="Acerca de..."
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
 
@@ -175,7 +283,6 @@
                 android:id="@+id/ajustes"
                 android:layout_width="match_parent"
                 android:layout_height="66dp"
-                android:layout_marginTop="2dp"
                 app:layout_constraintTop_toBottomOf="@+id/about"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="2dp">
@@ -185,22 +292,40 @@
                     android:layout_height="match_parent"
                     android:onClick="lanzarPreferencias">
 
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:drawableLeft="@drawable/ic_settings_black_24dp"
-                        android:text="AJUSTES"
+                    <View
+                        android:id="@+id/divider5"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5sp"
+                        android:background="?android:attr/listDivider"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginLeft="130dp"
+                        android:layout_marginStart="130dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintBottom_toTopOf="@+id/divider5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_settings_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
+                        android:text="Configuración"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                        app:layout_constraintStart_toEndOf="@+id/imageView4"
+                        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
 
@@ -209,7 +334,6 @@
                 android:id="@+id/sesion"
                 android:layout_width="match_parent"
                 android:layout_height="66dp"
-                android:layout_marginTop="2dp"
                 app:layout_constraintTop_toBottomOf="@+id/ajustes"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="2dp">
@@ -219,22 +343,40 @@
                     android:layout_height="match_parent"
                     android:onClick="cerrarSesion">
 
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:drawableLeft="@drawable/ic_exit_to_app_black_24dp"
-                        android:text="CERRAR SESIÓN"
+                    <View
+                        android:id="@+id/divider6"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5sp"
+                        android:background="?android:attr/listDivider"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginLeft="130dp"
+                        android:layout_marginStart="130dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintBottom_toTopOf="@+id/divider6"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_exit_to_app_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
+                        android:text="Cerrar sesión"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                        app:layout_constraintStart_toEndOf="@+id/imageView5"
+                        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
 

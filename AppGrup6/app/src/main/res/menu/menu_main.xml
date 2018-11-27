@@ -2,9 +2,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.grupo6.appgrup6.MainActivity">
-    <item android:id="@+id/menu_usuario"
-        android:title="Perfil de Usuario"
+    <item
+        android:id="@+id/menu_usuario"
+        android:layout_width="wrap_content"
         android:icon="@drawable/ic_user_24dp"
-        android:orderInCategory="1"
-        app:showAsAction="always|withText"/>
+        android:orderInCategory="3"
+        android:title="Perfil de Usuario"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/sens"
+        android:icon="@android:drawable/alert_dark_frame"
+        android:orderInCategory="4"
+        android:title="sens"
+        app:showAsAction="always|withText" />
 </menu>

@@ -14,6 +14,8 @@ const char broker[] = "iot.eclipse.org";
 WiFiClient net;
 MQTTClient client;
 unsigned long lastMillis = 0;
+const char ssid1[] = "Grupo6";
+const char passw[] = "12345678";
 
 //BÁSCULA
 HX711 balanza(DOUT, CLK);
@@ -55,9 +57,11 @@ void messageReceived(String &topic, String &payload) {
 
 void setup(){
     Serial.begin(115200);
+    WiFi.begin(ssid1, passw);
     client.begin(broker, net);
     client.onMessage(messageReceived);
     connect();
+
     rtc_clk_cpu_freq_set(RTC_CPU_FREQ_80M);   //bajo la frecuencia a 80MHz
     setTime (17, 45, 0, 22, 10, 2018); //hora minuto segundo dia mes año
     wifi.conectar();
@@ -90,9 +94,11 @@ void loop(){
    if (millis() - lastMillis > 1000) {
    lastMillis = millis();
    client.publish("grupo6/practica/cmnd/power", "toggle");
-   client.publish("grupo6/practica/cmnd/distancia", altura);
-   client.publish("grupo6/practica/cmnd/movimiento", "" + mov);
+   client.publish("grupo6/practica/distancia", altura);
+   client.publish("grupo6/practica/movimiento", "" + mov);
    } 
+
+   Serial.print(mov);
 
     //Se recopilan todos esos datos en un objeto JSON
     envio["Hora"]=fecha;

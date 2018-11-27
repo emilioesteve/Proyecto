@@ -2,7 +2,11 @@ package com.example.grupo6.appgrup6;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +22,23 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import static android.content.ContentValues.TAG;
 
 public class TabPeso extends Fragment {
 
@@ -29,8 +48,12 @@ public class TabPeso extends Fragment {
             "Viernes", "Sábado", "Domingo"};
     private int[] colors = new int[]{ Color.BLACK, Color.RED, Color.BLUE, Color.GREEN,
             Color.MAGENTA, Color.YELLOW, Color.LTGRAY };
-    //private RecyclerView.layoutManager layoutManager;
-    //public static AdaptadorLugaresFirestoreUI adaptador;
+    FirebaseFirestore db =FirebaseFirestore.getInstance();
+    RecyclerView mRecyclerView;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    CollectionReference userPeso = db.collection("usuarios").document(user.getUid()).collection("bascula");
+    ArrayList<Peso> pesoArrayList;
+    MyAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,19 +62,13 @@ public class TabPeso extends Fragment {
         barChart = (BarChart)rootView.findViewById(R.id.barChart);
         createCharts();
 
-
-
-
-        /*final FragmentActivity c = getActivity();
-        final RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(c);
-        recyclerView.setLayoutManager(layoutManager);
-
-
-
-        final AdaptadorPesosFirestoreUI adapter = new AdaptadorPesosFirestoreUI(c);
-
-        recyclerView.setAdapter(adapter);*/
+        pesoArrayList = new ArrayList<>();
+        mRecyclerView = rootView.findViewById(R.id.recycler);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(manager);
+        setUpDatos();
+        loadDataFromFirestore();
 
         return rootView;
 
@@ -133,5 +150,41 @@ public class TabPeso extends Fragment {
         barData.setBarWidth(0.65f);
         return barData;
     }
+
+    private void loadDataFromFirestore() {
+
+        if (pesoArrayList.size() > 0) {
+            pesoArrayList.clear();
+        }
+
+        final CollectionReference medidasInfo = db.collection("usuarios").document(user.getUid()).collection("bascula");
+
+        medidasInfo.orderBy("fecha", Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+
+                            Log.d(TAG, documentSnapshot.getId() + " => " + documentSnapshot.getData());
+
+                            Peso mimedida = new Peso(documentSnapshot.getString("fecha"),documentSnapshot.getDouble("peso"));
+                            pesoArrayList.add(mimedida);
+
+                        }
+
+                        adapter = new MyAdapter(TabPeso.this, pesoArrayList);
+                        mRecyclerView.setAdapter(adapter);
+
+                    }
+                });
+
+    }//loadDataFromFirestore()
+
+    private void setUpDatos() {
+
+        db = FirebaseFirestore.getInstance();
+    }
+
 
 }

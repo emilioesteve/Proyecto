@@ -47,8 +47,8 @@ void connect() {
  delay(1000);
  }
  Serial.println("\nconnected!");
- client.subscribe("grupo6/practica/#");
- //client.unsubscribe("grupo6/practica/#");
+ client.subscribe("grupo6/proyecto/#");
+ //client.unsubscribe("grupo6/proyecto/#");
 }
 
 void messageReceived(String &topic, String &payload) {
@@ -82,8 +82,9 @@ void loop(){
     balanza.read();
     //Se procesan todos los datos obtenidos de los sensores
     String fecha = String(day()) + "/" + String(month()) + "/" + String(year()) + "  " + String( hour()) + ":" + String(minute()) + ":" + String(second()); 
-    String altura = String(distancia.calcularDistancia()) + "cm";
+    String altura = String(distancia.calcularDistancia());
     bool mov = movimiento.detectarMovimiento();
+//    double peso = ;
 
    client.loop();
    delay(10); // <- Esperamos a que WiFi sea estable
@@ -93,9 +94,9 @@ void loop(){
    // publicamos un mensaje cada segundo
    if (millis() - lastMillis > 1000) {
    lastMillis = millis();
-   client.publish("grupo6/practica/cmnd/power", "toggle");
-   client.publish("grupo6/practica/distancia", altura);
-   client.publish("grupo6/practica/movimiento", "" + mov);
+// client.publish("grupo6/proyecto/temp/peso", float(balanza.get_units(20),3));
+   client.publish("grupo6/proyecto/temp/distancia", altura);
+   client.publish("grupo6/proyecto/temp/movimiento", "" + mov);
    } 
 
    Serial.print(mov);

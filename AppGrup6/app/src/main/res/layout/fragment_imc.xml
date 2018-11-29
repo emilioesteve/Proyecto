@@ -26,4 +26,44 @@
         app:progressWidth="20dp"
         app:roundEdges="true" />
 
+    <Button
+        android:id="@+id/queEsImc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="¿Qué es el IMC?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gradientSeekBar" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Como mejorarlo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/queEsImc" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="57dp"
+        android:layout_height="52dp"
+        android:gravity="center"
+        android:text="22%"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/gradientSeekBar"
+        app:layout_constraintEnd_toEndOf="@+id/gradientSeekBar"
+        app:layout_constraintStart_toStartOf="@+id/gradientSeekBar"
+        app:layout_constraintTop_toTopOf="@+id/gradientSeekBar" />
+
 </android.support.constraint.ConstraintLayout>

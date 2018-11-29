@@ -1,9 +1,14 @@
 package com.example.grupo6.appgrup6;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -29,11 +34,15 @@ import static com.example.grupo6.appgrup6.Mqtt.TAG;
 
 public class SensorsActivity extends AppCompatActivity implements MqttCallback {
     MqttClient client ;
+    private NotificationManager notificationManager;
+    static final String CANAL_ID = "mi_canal";
+    static final int NOTIFICACION_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensors);
+
 
         try {
             Log.i(TAG, "Conectando al broker " + broker);
@@ -56,8 +65,6 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
         } catch (MqttException e) {
             Log.e(TAG, "Error al suscribir.", e);
         }
-
-
 
 
     }
@@ -94,6 +101,21 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.menu_usuario) {
+            Intent intent = new Intent(this, UsuarioActivity.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override public void connectionLost(Throwable cause) {
         Log.d(TAG, "Conexión perdida");
     }
@@ -107,14 +129,25 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+
                 TextView a = (TextView) findViewById(R.id.msgsalon);
                 a.setText(payload);
 
                 TextView b = (TextView) findViewById(R.id.msgcomedor);
                 b.setText(payload);
 
-                /*TextView c = (TextView) findViewById(R.id.msgdormitorio);
-                c.setText(payload);*/
+                TextView c = (TextView) findViewById(R.id.msgbaño);
+                c.setText(payload);
+
+                TextView d = (TextView) findViewById(R.id.msgdorm1);
+                d.setText(payload);
+
+                TextView e = (TextView) findViewById(R.id.msgdorm2);
+                e.setText(payload);
+
+                notificacion(null);
+
             }
         });
     }
@@ -124,6 +157,27 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
         Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("http://mqtt.org/"));
         startActivity(intent);
+    }
+
+    public void notificacion(View view){
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(
+                    CANAL_ID, "Mis Notificaciones",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("Descripcion del canal");
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+        NotificationCompat.Builder notificacion =
+                new NotificationCompat.Builder(SensorsActivity.this, CANAL_ID)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle("ATENCIÖN")
+                        .setContentText("Tienes algunas luces encendidas");
+        PendingIntent intencionPendiente = PendingIntent.getActivity(
+                this, 0, new Intent(this, SensorsActivity.class), 0);
+        notificacion.setContentIntent(intencionPendiente);
+        notificationManager.notify(NOTIFICACION_ID, notificacion.build());
+
     }
 
 }

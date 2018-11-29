@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 lanzarSensores(view);
             }
         });
+
     }
 
 
@@ -91,12 +92,6 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-
-    public void lanzarSensores(View view){
-        Intent intent = new Intent(this, SensorsActivity.class);
-        startActivity(intent);
-
     }
 
     @Override
@@ -110,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, UsuarioActivity.class);
             startActivity(intent);
         }
-
 
         return super.onOptionsItemSelected(item);
     }
@@ -177,6 +171,12 @@ public class MainActivity extends AppCompatActivity {
                 this, 0, new Intent(this, TabPeso.class), 0);
         notificacion.setContentIntent(intencionPendiente);
         notificationManager.notify(NOTIFICACION_ID, notificacion.build());
+
+    }
+
+    public void lanzarSensores(View view){
+        Intent intent = new Intent(this, SensorsActivity.class);
+        startActivity(intent);
 
     }
 

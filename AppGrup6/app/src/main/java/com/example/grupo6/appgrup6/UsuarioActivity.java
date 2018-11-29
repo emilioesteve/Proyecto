@@ -34,8 +34,13 @@ public class UsuarioActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void llamarServTecnico(View view) {
-        startActivity(new Intent(Intent.ACTION_DIAL,
-                Uri.parse("tel:" + "646601542")));
+    public void lanzarContacto(View view) {
+        Intent i = new Intent(this, ContactoActivity.class);
+        startActivity(i);
+    }
+
+    public void lanzarEditar(View view) {
+        Intent i = new Intent(this, EditarPerfilActivity.class);
+        startActivity(i);
     }
 }

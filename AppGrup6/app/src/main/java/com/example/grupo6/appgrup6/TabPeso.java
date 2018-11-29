@@ -1,21 +1,18 @@
 package com.example.grupo6.appgrup6;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
+import android.app.Activity;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
@@ -33,7 +30,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -45,14 +46,13 @@ import java.util.Map;
 import java.util.Random;
 
 import static android.content.ContentValues.TAG;
-import static android.content.Context.NOTIFICATION_SERVICE;
-
 
 public class TabPeso extends Fragment {
 
     private BarChart barChart;
     private int[] pesos = { 74, 50, 65, 80, 76, 65, 80 };
-    private String[] dias = {"L", "M", "X", "J","V", "S", "D"};
+    private String[] dias = {"Lunes", "Martes", "Miércoles", "Jueves",
+            "Viernes", "Sábado", "Domingo"};
     private int[] colors = new int[]{ Color.BLACK, Color.RED, Color.BLUE, Color.GREEN,
             Color.MAGENTA, Color.YELLOW, Color.LTGRAY };
     FirebaseFirestore db =FirebaseFirestore.getInstance();
@@ -62,16 +62,13 @@ public class TabPeso extends Fragment {
     ArrayList<Peso> pesoArrayList;
     MyAdapter adapter;
 
-    //Sistema de notificaciones parcialmente implementado.
-    int a = 20;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_peso, container, false);
         barChart = (BarChart)rootView.findViewById(R.id.barChart);
-
+        createCharts();
 
         pesoArrayList = new ArrayList<>();
         mRecyclerView = rootView.findViewById(R.id.recycler);
@@ -80,8 +77,6 @@ public class TabPeso extends Fragment {
         mRecyclerView.setLayoutManager(manager);
         setUpDatos();
         loadDataFromFirestore();
-
-        createCharts();
 
         return rootView;
 
@@ -182,8 +177,8 @@ public class TabPeso extends Fragment {
                             Log.d(TAG, documentSnapshot.getId() + " => " + documentSnapshot.getData());
 
                             Peso mimedida = new Peso(documentSnapshot.getString("fecha"),documentSnapshot.getDouble("peso"));
-
                             pesoArrayList.add(mimedida);
+
                         }
 
                         adapter = new MyAdapter(TabPeso.this, pesoArrayList);
@@ -194,14 +189,9 @@ public class TabPeso extends Fragment {
 
     }//loadDataFromFirestore()
 
-
-
-
     private void setUpDatos() {
 
         db = FirebaseFirestore.getInstance();
     }
-
-
 
 }

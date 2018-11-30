@@ -35,6 +35,12 @@ public class TabImc extends Fragment {
             }
         });
 
+        Button b = (Button) rootView.findViewById(R.id.mejorarIMC);
+        b.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                pgWeb1(v);
+            }
+        });
 
         return rootView;
     }

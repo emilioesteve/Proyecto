@@ -63,10 +63,10 @@ void setup(){
     connect();
 
     rtc_clk_cpu_freq_set(RTC_CPU_FREQ_80M);   //bajo la frecuencia a 80MHz
-    setTime (17, 45, 0, 22, 10, 2018); //hora minuto segundo dia mes año
+    setTime (12, 40, 0, 30, 11, 2018); //hora minuto segundo dia mes año
     wifi.conectar();
     udp.escuchar(wifi);
-    balanza.set_scale(24400); // Establecemos la escala
+    balanza.set_scale(25400); // Establecemos la escala
     balanza.tare(20);  //El peso actual es considerado Tara.
 }
 

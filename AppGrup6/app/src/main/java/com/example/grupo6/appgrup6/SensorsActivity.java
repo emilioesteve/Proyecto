@@ -131,6 +131,10 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
             public void run() {
 
 
+                if( payload.equals("ON") ){
+                    notificacion(null);
+                }
+
                 TextView a = (TextView) findViewById(R.id.msgsalon);
                 a.setText(payload);
 
@@ -146,7 +150,6 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
                 TextView e = (TextView) findViewById(R.id.msgdorm2);
                 e.setText(payload);
 
-                notificacion(null);
 
             }
         });

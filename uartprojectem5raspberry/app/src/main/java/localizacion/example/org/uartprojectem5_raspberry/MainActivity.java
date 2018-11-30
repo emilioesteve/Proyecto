@@ -100,18 +100,18 @@ public class MainActivity extends Activity implements MqttCallback {
 
 
         Map<String, Object> datos = new HashMap<>();
-        if(topic == topicRoot + "temp/distancia"){
+        if(topic.equals(topicRoot + "temp/distancia")){
             datos.put("distancia", payload);
             db.collection("usuarios").document("values").set(datos);
         }
 
-        if ( topic == topicRoot + "temp/movimiento"){
+        if ( topic.equals(topicRoot + "temp/movimiento")){
             datos.put("movimiento", payload);
             db.collection("usuarios").document("values").set(datos);
         }
 
-        datos.put(topic, payload);
-        db.collection("usuarios").document("values").update(datos);
+        /*datos.put(topic, payload);
+        db.collection("usuarios").document("values").update(datos);*/
 
 
     }

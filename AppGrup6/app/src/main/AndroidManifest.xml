@@ -45,6 +45,11 @@
         <activity android:name=".ContactoActivity" />
         <activity android:name=".EditarPerfilActivity" />
         <activity android:name=".EdicionActivity"></activity>
+        <service android:name=".ServicioAcelerometro" />
+        <service android:name=".ServicioGas" />
+
     </application>
+
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
 </manifest>

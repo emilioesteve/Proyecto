@@ -84,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        lanzarServicioAcelerometro(null);
+        lanzarServicioGas(null);
+
     }
 
 
@@ -178,6 +181,16 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SensorsActivity.class);
         startActivity(intent);
 
+    }
+
+    void lanzarServicioGas(View view){
+        Intent intent = new Intent(this, ServicioGas.class);
+        startService(intent);
+    }
+
+    void lanzarServicioAcelerometro(View view){
+        Intent intent = new Intent(this, ServicioAcelerometro.class);
+        startService(intent);
     }
 
 }

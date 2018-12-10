@@ -28,6 +28,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.type.LatLng;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -49,6 +51,7 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
     private NotificationManager notificationManager;
     static final String CANAL_ID = "mi_canal";
     static final int NOTIFICACION_ID = 1;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,16 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
             Log.e(TAG, "Error al suscribir.", e);
         }
 
+        try {
+            Log.i(TAG, "Publicando mensaje: " + user.getUid());
+            MqttMessage message = new MqttMessage(user.getUid().getBytes());
+            message.setQos(qos);
+            message.setRetained(false);
+            client.publish(topicRoot + "temp/IdUsuario", message);
+            Log.v("ID USUARIO", user.getUid());
+        } catch (MqttException e) {
+            Log.e(TAG, "Error al publicar.", e);
+        }
 
     }
 

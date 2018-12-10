@@ -1,13 +1,20 @@
 package com.example.grupo6.appgrup6;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +23,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.type.LatLng;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -33,7 +45,7 @@ import static com.example.grupo6.appgrup6.Mqtt.topicRoot;
 import static com.example.grupo6.appgrup6.Mqtt.TAG;
 
 public class SensorsActivity extends AppCompatActivity implements MqttCallback {
-    MqttClient client ;
+    MqttClient client;
     private NotificationManager notificationManager;
     static final String CANAL_ID = "mi_canal";
     static final int NOTIFICACION_ID = 1;
@@ -43,6 +55,8 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensors);
 
+        /*Button a = (Button) findViewById(R.id.mapa);
+        a.setOnClickListener(View.OnClickListener());*/
 
         try {
             Log.i(TAG, "Conectando al broker " + broker);
@@ -50,7 +64,7 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setCleanSession(true);
             connOpts.setKeepAliveInterval(60);
-            connOpts.setWill(topicRoot+"WillTopic", "App desconectada".getBytes(),
+            connOpts.setWill(topicRoot + "WillTopic", "App desconectada".getBytes(),
                     qos, false);
 
             client.connect(connOpts);
@@ -59,8 +73,8 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
         }
 
         try {
-            Log.i(TAG, "Suscrito a " + topicRoot+"POWER");
-            client.subscribe(topicRoot+"POWER", qos);
+            Log.i(TAG, "Suscrito a " + topicRoot + "POWER");
+            client.subscribe(topicRoot + "POWER", qos);
             client.setCallback(this);
         } catch (MqttException e) {
             Log.e(TAG, "Error al suscribir.", e);
@@ -82,7 +96,8 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
     }
 
 
-    @Override public void onDestroy() {
+    @Override
+    public void onDestroy() {
         try {
             Log.i(TAG, "Desconectado");
             client.disconnect();
@@ -91,7 +106,6 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
         }
         super.onDestroy();
     }
-
 
 
     @Override
@@ -116,13 +130,18 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override public void connectionLost(Throwable cause) {
+    @Override
+    public void connectionLost(Throwable cause) {
         Log.d(TAG, "Conexión perdida");
     }
-    @Override public void deliveryComplete(IMqttDeliveryToken token) {
+
+    @Override
+    public void deliveryComplete(IMqttDeliveryToken token) {
         Log.d(TAG, "Entrega completa");
     }
-    @Override public void messageArrived(String topic, MqttMessage message)
+
+    @Override
+    public void messageArrived(String topic, MqttMessage message)
             throws Exception {
         final String payload = new String(message.getPayload());
         Log.d(TAG, "Recibiendo: " + topic + "->" + payload);
@@ -131,7 +150,7 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
             public void run() {
 
 
-                if( payload.equals("ON") ){
+                if (payload.equals("ON")) {
                     notificacion(null);
                 }
 
@@ -162,7 +181,7 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
         startActivity(intent);
     }
 
-    public void notificacion(View view){
+    public void notificacion(View view) {
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(
@@ -183,4 +202,22 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
 
     }
 
+    public void verMapa(View view) {
+        LocationManager locationManager = (LocationManager)
+                getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        // AUNQUE DE ERROR EN ESTA LINEA SIGUE FUNCIONANDO
+        Location location = locationManager.getLastKnownLocation(locationManager
+                .getBestProvider(criteria, false));
+        double lat = location.getLatitude();
+        double lon = location.getLongitude();
+        Uri uri;
+        //double lat = 0.0;
+        //double lon = 0.0;
+        //if (lat != 0 || lon != 0) {
+            uri = Uri.parse("geo:" + lat + "," + lon);
+        //}
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
 }

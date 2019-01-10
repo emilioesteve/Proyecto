@@ -22,10 +22,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
+import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
+    private FABToolbarLayout morph;
+
     private ViewPager mViewPager;
     private NotificationManager notificationManager;
     static final String CANAL_ID = "mi_canal";
@@ -61,6 +63,40 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        morph = (FABToolbarLayout) findViewById(R.id.fabtoolbar);
+
+        View uno, dos, tres, cuatro;
+
+        uno = findViewById(R.id.uno);
+        dos = findViewById(R.id.dos);
+        cuatro = findViewById(R.id.cuatro);
+        tres = findViewById(R.id.tres);
+
+        fab.setOnClickListener(this);
+        uno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lanzarSensores(view);
+                morph.hide();
+                }
+                });
+        dos.setOnClickListener(this);
+        tres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lanzarMedicinas(view);
+                morph.hide();
+            }
+        });
+        cuatro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lanzarMapa(view);
+                morph.hide();
+            }
+        });
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -74,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,11 +118,20 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
                 lanzarSensores(view);
             }
-        });
+        });*/
 
         lanzarServicioAcelerometro(null);
         lanzarServicioGas(null);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.fab) {
+            morph.show();
+        }
+
+        morph.hide();
     }
 
 
@@ -179,6 +224,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void lanzarSensores(View view){
         Intent intent = new Intent(this, SensorsActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void lanzarMedicinas(View view){
+        Intent intent = new Intent(this, MedicinasActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void lanzarMapa(View view){
+        Intent intent = new Intent(this, Mapa.class);
         startActivity(intent);
 
     }

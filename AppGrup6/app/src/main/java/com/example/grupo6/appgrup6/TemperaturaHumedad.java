@@ -1,36 +1,17 @@
 package com.example.grupo6.appgrup6;
 
-import android.annotation.SuppressLint;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
-import android.net.Uri;
-import android.os.Build;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.type.LatLng;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -40,17 +21,15 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+import static com.example.grupo6.appgrup6.Mqtt.TAG;
 import static com.example.grupo6.appgrup6.Mqtt.broker;
 import static com.example.grupo6.appgrup6.Mqtt.clientId;
 import static com.example.grupo6.appgrup6.Mqtt.qos;
 import static com.example.grupo6.appgrup6.Mqtt.topicRoot;
-import static com.example.grupo6.appgrup6.Mqtt.TAG;
 
-public class SensorsActivity extends AppCompatActivity implements MqttCallback {
+public class TemperaturaHumedad extends AppCompatActivity implements MqttCallback {
+
     MqttClient client;
-    private NotificationManager notificationManager;
-    static final String CANAL_ID = "mi_canal";
-    static final int NOTIFICACION_ID = 1;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
@@ -162,19 +141,11 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
             @Override
             public void run() {
 
-
-                if (payload.equals("ON")) {
-                    notificacion(null);
-                }
-
                 TextView a = (TextView) findViewById(R.id.msgsalon);
                 a.setText(payload);
 
                 TextView b = (TextView) findViewById(R.id.msgcomedor);
                 b.setText(payload);
-
-                TextView c = (TextView) findViewById(R.id.msgbaño);
-                c.setText(payload);
 
                 TextView d = (TextView) findViewById(R.id.msgdorm1);
                 d.setText(payload);
@@ -185,33 +156,5 @@ public class SensorsActivity extends AppCompatActivity implements MqttCallback {
 
             }
         });
-    }
-
-
-    public void pgWeb(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("http://mqtt.org/"));
-        startActivity(intent);
-    }
-
-    public void notificacion(View view) {
-        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(
-                    CANAL_ID, "Mis Notificaciones",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            notificationChannel.setDescription("Descripcion del canal");
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-        NotificationCompat.Builder notificacion =
-                new NotificationCompat.Builder(SensorsActivity.this, CANAL_ID)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("ATENCIÖN")
-                        .setContentText("Tienes algunas luces encendidas");
-        PendingIntent intencionPendiente = PendingIntent.getActivity(
-                this, 0, new Intent(this, SensorsActivity.class), 0);
-        notificacion.setContentIntent(intencionPendiente);
-        notificationManager.notify(NOTIFICACION_ID, notificacion.build());
-
     }
 }

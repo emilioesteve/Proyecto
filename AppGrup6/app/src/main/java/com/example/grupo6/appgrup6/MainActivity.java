@@ -1,13 +1,19 @@
 package com.example.grupo6.appgrup6;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -41,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * The {@link ViewPager} that will host the section contents.
      */
     private FABToolbarLayout morph;
+    private static final int SOLICITUD_PERMISO_ACCESS_FINE_LOCATION = 0;
 
     private ViewPager mViewPager;
     private NotificationManager notificationManager;
@@ -52,14 +60,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        //Sistema de notificaciones parcialmente implementado.
-        int a = 20;
-
-        if( a < 30 ){
-            notificacion(null);
-        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -138,6 +138,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         morph.hide();
+    }
+
+    public static void solicitarPermiso(final String permiso, String
+            justificacion, final int requestCode, final Activity actividad) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(actividad,
+                permiso)) {
+            new AlertDialog.Builder(actividad)
+                    .setTitle("Solicitud de permiso")
+                    .setMessage(justificacion)
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            ActivityCompat.requestPermissions(actividad,
+                                    new String[]{permiso}, requestCode);
+                        }
+                    })
+                    .show();
+        } else {
+            ActivityCompat.requestPermissions(actividad,
+                    new String[]{permiso}, requestCode);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        if (requestCode == SOLICITUD_PERMISO_ACCESS_FINE_LOCATION) {
+            if (grantResults.length == 1 &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                lanzarMapa(null);
+            } else {
+                Toast.makeText(this, "Sin el permiso, no puedo realizar la " +
+                        "acción", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 
@@ -236,8 +270,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void lanzarMapa(View view){
-        Intent intent = new Intent(this, Mapa.class);
-        startActivity(intent);
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+            Intent intent = new Intent(this, Mapa.class);
+            startActivity(intent);
+
+        } else {
+            solicitarPermiso(Manifest.permission.ACCESS_FINE_LOCATION, "Sin el permiso" +
+                            " no puedo mostrarte tu localizacion.",
+                    SOLICITUD_PERMISO_ACCESS_FINE_LOCATION, this);
+        }
 
     }
 

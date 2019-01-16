@@ -51,7 +51,6 @@ public class ServicioAcelerometro extends Service implements SensorEventListener
     @Override
     public void onSensorChanged(SensorEvent evento) {
         for (int i = 0; i < 3; i++) {
-            Log.v("Acelerometro", "Acelerómetro " + i + ": " + evento.values[i]);
             if(evento.values[i] >= 30 ){
                 llamadaTelefono(null);
                 notificacion(null);

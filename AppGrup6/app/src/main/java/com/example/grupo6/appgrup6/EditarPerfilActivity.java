@@ -14,17 +14,26 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 
 public class EditarPerfilActivity extends AppCompatActivity {
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_perfil);
+
+        TextView sexo = (TextView) findViewById(R.id.sexo);
+        TextView nacimiento = (TextView) findViewById(R.id.nacimiento);
+
+        Bundle extras = getIntent().getExtras();
+        String sex = extras.getString("Genero");
+        String date = extras.getString("Nacimiento");
+
+        sexo.setText(sex);
+        nacimiento.setText(date);
 
     }
 

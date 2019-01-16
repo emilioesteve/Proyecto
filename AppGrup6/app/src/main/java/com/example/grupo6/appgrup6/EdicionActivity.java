@@ -22,7 +22,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,7 @@ public class EdicionActivity extends AppCompatActivity {
 
     private TextView btn;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    String date;
 
 
     @Override
@@ -75,7 +78,7 @@ public class EdicionActivity extends AppCompatActivity {
                 month = month +1;
                 Log.d(TAG, "onDataSet: date: " + dayOfMonth + "/" + month + "/" + year);
 
-                String date = dayOfMonth + "/" + month + "/" + year;
+                date = dayOfMonth + "/" + month + "/" + year;
                 btn.setText(date);
             }
         };
@@ -91,7 +94,7 @@ public class EdicionActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.accion_guardar:
-                finish();
+                lanzarEditarPerfilF(null);
                 return true;
             case R.id.accion_cancelar:
                 finish();
@@ -99,6 +102,26 @@ public class EdicionActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    void lanzarEditarPerfilF(View view){
+
+        String c;
+        String d;
+        RadioButton masc = (RadioButton) findViewById(R.id.radio_masculino);
+        RadioButton fem = (RadioButton) findViewById(R.id.radio_femenino);
+
+        if( masc.isChecked() == true ){
+             c = "Masculino";
+        } else{
+             c = "Femenino";
+        }
+
+        Intent intent = new Intent(this, EditarPerfilActivity.class);
+        intent.putExtra("Genero", c);
+        intent.putExtra("Nacimiento", date);
+        startActivity(intent);
+
     }
    
 

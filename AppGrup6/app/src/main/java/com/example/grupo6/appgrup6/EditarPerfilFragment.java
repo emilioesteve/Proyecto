@@ -51,6 +51,8 @@ public class EditarPerfilFragment extends Fragment {
 
         return vista;
 
+
+
     }
 
 }

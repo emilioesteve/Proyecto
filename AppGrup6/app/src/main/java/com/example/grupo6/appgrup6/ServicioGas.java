@@ -2,12 +2,14 @@ package com.example.grupo6.appgrup6;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -26,22 +28,25 @@ public class ServicioGas extends Service {
 
     @Override
     public int onStartCommand(Intent intenc, int flags, int idArranque) {
+        notificacion(null);
+        return START_STICKY;
+    }
+
+    public void notificacion(View view) {
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(
-                    CANAL_ID, "App",
+                    CANAL_ID, "Mis Notificaciones",
                     NotificationManager.IMPORTANCE_DEFAULT);
-            notificationChannel.setDescription("App");
+            notificationChannel.setDescription("Descripcion del canal");
             notificationManager.createNotificationChannel(notificationChannel);
         }
         NotificationCompat.Builder notificacion =
                 new NotificationCompat.Builder(ServicioGas.this, CANAL_ID)
                         .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("Servicio")
-                        .setContentText("Notificacion del servicio");
+                        .setContentTitle("ATENCIÖN")
+                        .setContentText("HAY UN EXCESO DE GAS");
         notificationManager.notify(NOTIFICACION_ID, notificacion.build());
-        Log.d("Servicio", "Servicio lanzado");
-        return START_STICKY;
     }
 
     @Nullable

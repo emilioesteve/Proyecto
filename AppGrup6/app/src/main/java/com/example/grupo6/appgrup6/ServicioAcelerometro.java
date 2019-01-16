@@ -2,6 +2,7 @@ package com.example.grupo6.appgrup6;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -53,6 +54,7 @@ public class ServicioAcelerometro extends Service implements SensorEventListener
             Log.v("Acelerometro", "Acelerómetro " + i + ": " + evento.values[i]);
             if(evento.values[i] >= 30 ){
                 llamadaTelefono(null);
+                notificacion(null);
             }
         }
 
@@ -60,21 +62,7 @@ public class ServicioAcelerometro extends Service implements SensorEventListener
 
     @Override
     public int onStartCommand(Intent intenc, int flags, int idArranque) {
-        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(
-                    CANAL_ID, "App",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            notificationChannel.setDescription("App");
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-        NotificationCompat.Builder notificacion =
-                new NotificationCompat.Builder(ServicioAcelerometro.this, CANAL_ID)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("CAÍDA")
-                        .setContentText("Se ha caído");
-        notificationManager.notify(NOTIFICACION_ID, notificacion.build());
-        Log.d("Acelerómetro", "Ha habido una aceleración");
+
         return START_STICKY;
     }
 
@@ -83,6 +71,23 @@ public class ServicioAcelerometro extends Service implements SensorEventListener
                 Uri.parse("tel:" + "646601542")));
     }
 
+    public void notificacion(View view) {
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(
+                    CANAL_ID, "Mis Notificaciones",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("Descripcion del canal");
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+        NotificationCompat.Builder notificacion =
+                new NotificationCompat.Builder(ServicioAcelerometro.this, CANAL_ID)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle("CAIDA")
+                        .setContentText("HA HABIDO UN ACCIDENTE");
+        notificationManager.notify(NOTIFICACION_ID, notificacion.build());
+
+    }
 
     @Override
     public IBinder onBind(Intent intencion) {

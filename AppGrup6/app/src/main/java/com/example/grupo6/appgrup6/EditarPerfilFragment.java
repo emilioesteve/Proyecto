@@ -1,12 +1,9 @@
 package com.example.grupo6.appgrup6;
 
 
-import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.LruCache;
 import android.view.LayoutInflater;
@@ -29,7 +26,7 @@ public class EditarPerfilFragment extends Fragment {
         View vista = inflador.inflate(R.layout.fragment_editar,
                 contenedor, false);
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
-        TextView nombre = (TextView) vista.findViewById(R.id.peso);
+        TextView nombre = (TextView) vista.findViewById(R.id.pesoll);
         nombre.setText(usuario.getDisplayName());
 
         TextView correo = (TextView) vista.findViewById(R.id.correo);
@@ -38,13 +35,13 @@ public class EditarPerfilFragment extends Fragment {
         // Inicialización Volley (Hacer solo una vez en Singleton o Applicaction)
         RequestQueue colaPeticiones = Volley.newRequestQueue(getActivity().getApplicationContext());
         ImageLoader lectorImagenes = new ImageLoader(colaPeticiones, new ImageLoader.ImageCache() {
-                    private final LruCache<String, Bitmap> cache = new LruCache<>(10);
-                    public void putBitmap(String url, Bitmap bitmap) { cache.put(url, bitmap);
-                    }
-                    public Bitmap getBitmap(String url) {
-                        return cache.get(url);
-                    }
-                });
+            private final LruCache<String, Bitmap> cache = new LruCache<>(10);
+            public void putBitmap(String url, Bitmap bitmap) { cache.put(url, bitmap);
+            }
+            public Bitmap getBitmap(String url) {
+                return cache.get(url);
+            }
+        });
         // Foto de usuario
         Uri urlImagen = usuario.getPhotoUrl();
         if (urlImagen != null) {

@@ -57,7 +57,8 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".Mapa" />
-        <activity android:name=".TemperaturaHumedad"></activity>
+        <activity android:name=".TemperaturaHumedad" />
+
     </application>
 
 </manifest>

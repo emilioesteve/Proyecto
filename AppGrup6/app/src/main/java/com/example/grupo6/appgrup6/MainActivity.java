@@ -82,7 +82,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 morph.hide();
                 }
                 });
-        dos.setOnClickListener(this);
+        dos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lanzarCalefac(view);
+                morph.hide();
+            }
+        });
         tres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,9 +178,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case 1:
                     TabAltura tab2 = new TabAltura();
                     return tab2;
-                case 2:
-                    TabImc tab3 = new TabImc();
-                    return tab3;
                 default:
                     return null;
             }
@@ -184,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -194,8 +197,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     return "Peso";
                 case 1:
                     return "Altura";
-                case 2:
-                    return "Imc";
             }
             return null;
         }
@@ -236,6 +237,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void lanzarMapa(View view){
         Intent intent = new Intent(this, Mapa.class);
+        startActivity(intent);
+
+    }
+
+    public void lanzarCalefac(View view){
+        Intent intent = new Intent(this, TemperaturaHumedad.class);
         startActivity(intent);
 
     }

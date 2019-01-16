@@ -99,7 +99,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imagen">
 
                 <TextView
-                    android:id="@+id/peso"
+                    android:id="@+id/pesoll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"

@@ -6,7 +6,7 @@
         android:id="@+id/menu_usuario"
         android:layout_width="wrap_content"
         android:icon="@drawable/ic_user_24dp"
-        android:orderInCategory="5"
+        android:orderInCategory="6"
         android:title="Perfil de Usuario"
         app:showAsAction="always" />
 </menu>

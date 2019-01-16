@@ -2,7 +2,6 @@
     <string name="app_name">ScaleApp</string>
     <string name="tab_text_1">Peso</string>
     <string name="tab_text_2">Altura</string>
-    <string name="tab_text_3">IMC</string>
     <string name="action_settings">Opciones</string>
     <string-array name="altura">
         <item>cm</item>

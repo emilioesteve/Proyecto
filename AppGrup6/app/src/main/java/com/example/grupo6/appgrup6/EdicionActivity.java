@@ -38,15 +38,15 @@ public class EdicionActivity extends AppCompatActivity {
     private static final String TAG = "EdicionActivity";
 
     private TextView btn;
-    private ImageView galeria;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-    public static final int GET_FROM_GALLERY = 3;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edicion);
+
+
 
         btn = (TextView) findViewById(R.id.nacimientos);
 
@@ -79,15 +79,6 @@ public class EdicionActivity extends AppCompatActivity {
                 btn.setText(date);
             }
         };
-        galeria = (ImageView) findViewById(R.id.imageView13);
-
-        galeria.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
-
-            }
-        });
     }
 
     @Override
@@ -109,24 +100,6 @@ public class EdicionActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+   
 
-
-        //Detects request codes
-        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
-            Uri selectedImage = data.getData();
-            Bitmap bitmap = null;
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    }
 }

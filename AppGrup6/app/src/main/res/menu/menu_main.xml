@@ -3,10 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.grupo6.appgrup6.MainActivity">
     <item
+        android:id="@+id/caloria"
+        android:orderInCategory="8"
+        android:title="Calorías"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/recetario"
+        android:orderInCategory="7"
+        android:title="Recetario"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/calendario"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:orderInCategory="9"
+        android:title="Item"
+        app:showAsAction="always|collapseActionView" />
+    <item
+        android:id="@+id/accion_preguntas"
+        android:orderInCategory="6"
+        android:title="Foro"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/menu_usuario"
         android:layout_width="wrap_content"
         android:icon="@drawable/ic_user_24dp"
-        android:orderInCategory="6"
+        android:orderInCategory="10"
         android:title="Perfil de Usuario"
         app:showAsAction="always" />
 </menu>

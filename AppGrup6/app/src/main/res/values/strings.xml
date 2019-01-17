@@ -35,4 +35,7 @@
     <string name="twitter_consumer_key" translatable="false">gVcf6F6lgLySwB3VLpg85leji</string>
     <string name="twitter_consumer_secret" translatable="false">
         tWPKqVn04yc2JaI0QtS0cL6jP8DtZ75IMylBLMBu0hI4ZyeG5f</string>
+    <array name="preguntas">
+
+    </array>
 </resources>

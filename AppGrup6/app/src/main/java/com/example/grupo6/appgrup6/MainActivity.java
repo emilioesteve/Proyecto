@@ -193,6 +193,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, UsuarioActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.accion_preguntas) {
+            Intent intent = new Intent(this, PreguntasActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.calendario) {
+            Intent intent = new Intent(this, CalendarioActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.recetario) {
+            Intent intent = new Intent(this, RecetarioActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.caloria) {
+            Intent intent = new Intent(this, CaloriasActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }

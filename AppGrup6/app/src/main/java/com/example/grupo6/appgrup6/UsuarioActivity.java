@@ -46,6 +46,11 @@ public class UsuarioActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void lanzarMetas(View view) {
+        Intent i = new Intent(this, MetasActivity.class);
+        startActivity(i);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_user, menu);
